@@ -1,3 +1,4 @@
-Repo for fullstackopen course
+Repo for fullstackopen 2022 course
 
-Submmision link: https://studies.cs.helsinki.fi/stats/courses/fullstackopen
+Course Link: https://fullstackopen.com/en/
+Submission Link: https://studies.cs.helsinki.fi/stats/courses/fullstackopen
