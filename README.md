@@ -1,3 +1,3 @@
 Repo for fullstackopen course
 
-Submmision link: https://studies.cs.helsinki.fi/stats/
+Submmision link: https://studies.cs.helsinki.fi/stats/courses/fullstackopen
