@@ -1,1 +1,10 @@
 GET http://192.168.1.15:3001/api/persons
+
+###
+GET http://192.168.1.15:3001/api/persons/1
+
+###
+GET http://192.168.1.15:3001/info
+
+###
+DELETE http://192.168.1.15:3001/api/persons/4
