@@ -1,7 +1,20 @@
 const express = require('express')
+const morgan = require("morgan")
+
 const app = express()
+const morganLogger = morgan((tokens, req, res) => { // morganLogger initialization
+  return [
+    tokens.method(req, res),
+    tokens.url(req, res),
+    tokens.status(req, res),
+    tokens.res(req, res, 'content-length'), '-',
+    tokens['response-time'](req, res), 'ms',
+    JSON.stringify(req.body)
+  ].join(' ')
+})
 
 app.use(express.json())
+app.use(morganLogger)
 
 persons = [
     { 
@@ -26,9 +39,11 @@ persons = [
     }
 ]
 
+
 app.get('/api/persons', (request, response) => {
     response.json(persons)
   })
+
 
 app.get('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
@@ -41,12 +56,14 @@ app.get('/api/persons/:id', (request, response) => {
     }
 })
 
+
 app.get('/info', (request, response) => {
     response.send(`<div>
     <p>Phonebook has info for ${persons.length} people</p>
     <p>${Date()}</p>
     </div>`)
 })
+
 
 app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
@@ -55,10 +72,53 @@ app.delete('/api/persons/:id', (request, response) => {
     response.status(204).end()
 })
 
+
+const generateId = () => {
+  return Math.floor(Math.random() * 999999);
+}
+
+app.post('/api/persons', (request, response) => {
+const body = request.body
+
+if (!body) {
+  return response.status(400).json({ 
+    error: 'content missing' 
+  })
+}
+
+if (!body.name || !body.number) {
+  return response.status(400).json({
+    error: "missing name or number"
+  })
+}
+
+const nameExist = (x) => x.name === body.name
+
+if (persons.some(nameExist)) {
+  return response.status(400).json({
+    error: "name must be unique"
+  })
+}
+
+const person = {
+  id: generateId(),
+  name: body.name,
+  number: body.number
+}
+
+persons = persons.concat(person)
+
+response.json(person)
+})
+
+// Return 404 error if endpoint is unknown
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+
+app.use(unknownEndpoint)
+
 const PORT = 3001
 app.listen(PORT, () => {
 console.log(`Server running on port ${PORT}`)
 })
-
-
-// Paused at part 3.2
