@@ -1,5 +1,7 @@
 const express = require('express')
 const morgan = require("morgan")
+const cors = require('cors')
+
 
 const app = express()
 const morganLogger = morgan((tokens, req, res) => { // morganLogger initialization
@@ -14,7 +16,9 @@ const morganLogger = morgan((tokens, req, res) => { // morganLogger initializati
 })
 
 app.use(express.json())
+app.use(express.static('build'))
 app.use(morganLogger)
+app.use(cors())
 
 persons = [
     { 
@@ -111,14 +115,7 @@ persons = persons.concat(person)
 response.json(person)
 })
 
-// Return 404 error if endpoint is unknown
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
-}
-
-app.use(unknownEndpoint)
-
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
 console.log(`Server running on port ${PORT}`)
 })
