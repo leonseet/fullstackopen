@@ -13,7 +13,10 @@ mongoose.connect(url)
   })
 
 const personSchema = new mongoose.Schema({
-    name: String,
+    name: {
+      type: String,
+      minLength: 3
+    },
     number: String,
 })
 
@@ -26,3 +29,5 @@ personSchema.set('toJSON', {
 })
 
 module.exports = mongoose.model('Person', personSchema)
+
+// STOPPED AT 3.19
