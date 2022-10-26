@@ -3,6 +3,7 @@ const express = require('express')
 const morgan = require("morgan")
 const cors = require('cors')
 const Person = require("./models/person")
+const person = require('./models/person')
 
 const app = express()
 const morganLogger = morgan((tokens, req, res) => { // morganLogger initialization
@@ -20,29 +21,6 @@ app.use(express.json())
 app.use(express.static('build'))
 app.use(morganLogger)
 app.use(cors())
-
-// persons = [
-//     { 
-//       "id": 1,
-//       "name": "Arto Hellas", 
-//       "number": "040-123456"
-//     },
-//     { 
-//       "id": 2,
-//       "name": "Ada Lovelace", 
-//       "number": "39-44-5323523"
-//     },
-//     { 
-//       "id": 3,
-//       "name": "Dan Abramov", 
-//       "number": "12-43-234345"
-//     },
-//     { 
-//       "id": 4,
-//       "name": "Mary Poppendieck", 
-//       "number": "39-23-6423122"
-//     }
-// ]
 
 
 app.get('/api/persons', (request, response) => {
@@ -65,28 +43,28 @@ app.get('/api/persons/:id', (request, response, next) => {
   })
 
 
-app.get('/info', (request, response) => {
-  response.send(`<div>
-  <p>Phonebook has info for ${persons.length} people</p>
-  <p>${Date()}</p>
-  </div>`)
+app.get('/info', (request, response, next) => {
+  Person.countDocuments({}, function (err, count) {
+    if (err) {
+      next(err)
+    } else {
+      response.send(`<div>
+      <p>Phonebook has info for ${count} people</p>
+      <p>${Date()}</p>
+      </div>`)
+    }
+  })
 })
 
 
-app.delete('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
-  persons = persons.filter(person => person.id !== id)
-  
-  // Persons.deleteOne({_id: request.params.id})
-  response.status(204).end()
+app.delete('/api/persons/:id', (request, response, next) => {
+  Person.findByIdAndRemove(request.params.id)
+    .then(result => response.status(204).end())
+    .catch(error => next(error))
 })
 
 
-// const generateId = () => {
-//   return Math.floor(Math.random() * 999999);
-// }
-
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', (request, response, next) => {
   const body = request.body
 
   if (!body) {
@@ -101,22 +79,29 @@ app.post('/api/persons', (request, response) => {
     })
   }
 
-  // const nameExist = (x) => {
-  //   console.log(x.name === body.name)
-  //   x.name === body.name}
-
-  // if (Person.find({}).then(people => {people.some(nameExist)})) {
-  //   return response.status(400).json({
-  //     error: "name must be unique"
-  //   })    
-  // }
-
   const person = new Person({
     name: body.name,
     number: body.number,
   })
+  
+  person
+    .save()
+    .then(savedPerson => response.json(savedPerson))
+    .catch(error => next(error))
+})
 
-  person.save().then(savedPerson => response.json(savedPerson))
+
+app.put('/api/persons/:id', (request, response, next) => {
+  const body = request.body
+
+  const person = {
+    name: body.name,
+    number: body.number,
+  }
+
+  Person.findByIdAndUpdate(request.params.id, person, { new: true })
+    .then(updatedPerson => response.json(updatedPerson))
+    .catch(error => next(error))
 })
 
 const unknownEndpoint = (request, response) => {
@@ -141,6 +126,3 @@ const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
 console.log(`Server running on port ${PORT}`)
 })
-
-
-// STOPPED AT 3.15

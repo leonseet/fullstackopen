@@ -1,16 +1,18 @@
-GET http://localhost:3001/api/persons
+@baseurl = http://localhost:3001
+
+GET {{baseurl}}/api/persons
 
 ###
-GET http://localhost:3001/api/persons/6355ebabdeb9e4f54ca3d4c7
+GET {{baseurl}}/api/persons/6355eafd7e6660075eee3dbd
 
 ###
-GET http://localhost:3001/info
+GET {{baseurl}}/info
 
 ###
-DELETE http://localhost:3001/api/persons/63573609660dc7721369b253
+DELETE {{baseurl}}/api/persons/6357373e5187e900bbe64353
 
 ###
-POST http://localhost:3001/api/persons
+POST {{baseurl}}/api/persons
 content-type: application/json
 
 {
@@ -19,4 +21,13 @@ content-type: application/json
 }
 
 ###
-GET http://localhost:3001/error
+GET {{baseurl}}/error
+
+###
+PUT {{baseurl}}/api/persons/6358837602c2d610b09737e0
+content-type: application/json
+
+{
+    "name": "Leon",
+    "number": "12345"
+}
