@@ -76,7 +76,14 @@ const App = () => {
             setErrorMessage(null)
           }, 5000)
         })
-        .catch(error => console.log(error.response.data.error))
+        .catch(error => {
+          console.log(error.response.data.error)
+          setErrorMessage(error.response.data.error)
+          setErrorType("fail")
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
+        })
     }
   }
 

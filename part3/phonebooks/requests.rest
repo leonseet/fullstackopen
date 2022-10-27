@@ -9,15 +9,15 @@ GET {{baseurl}}/api/persons/6355eafd7e6660075eee3dbd
 GET {{baseurl}}/info
 
 ###
-DELETE {{baseurl}}/api/persons/6357373e5187e900bbe64353
+DELETE {{baseurl}}/api/persons/6359d27c2769bf468c3f321a
 
 ###
 POST {{baseurl}}/api/persons
 content-type: application/json
 
 {
-    "name": "Leon",
-    "number": "12345"
+    "name": "Leon2",
+    "number": "123-12345678911"
 }
 
 ###
