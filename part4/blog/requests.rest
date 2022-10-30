@@ -8,8 +8,8 @@ POST {{url}}/api/blogs
 content-type: application/json
 
 {
-    "title": "sample blog",
-    "author": "Leon",
-    "url": "www.leonblog.com",
-    "likes": 5
+    "title": "sample blog 2",
+    "author": "Leon2",
+    "url": "www.leonblog2.com",
+    "likes": 10
 }
