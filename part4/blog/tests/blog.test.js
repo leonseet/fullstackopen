@@ -97,6 +97,25 @@ describe("most likes", () => {
             }
         )
     })
+    test("author was detected", () => {
+        const result = listHelper.mostLikes(listWithManyBlogs)
+        expect(result).toEqual(
+            {
+                author: "Edsger W. Dijkstra",
+                likes: 17
+            }
+        )
+    })
+})
 
-
+describe("most blogs", () => {
+    test("author was detected", () => {
+        const result = listHelper.mostBlogs(listWithManyBlogs)
+        expect(result).toEqual(
+            {
+                author: "Robert C. Martin",
+                blogs: 3
+            }
+        )
+    })
 })

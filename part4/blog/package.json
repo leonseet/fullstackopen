@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "jest --verbose",
+    "test": "jest --verbose --silence=false",
     "lint": "eslint ."
   },
   "jest": {
@@ -18,6 +18,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "lodash": "^4.17.21",
     "mongoose": "^6.7.0"
   },
   "devDependencies": {
