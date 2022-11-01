@@ -2,9 +2,9 @@ const Blog = require('../models/blog')
 
 const initialBlogs = [
   {
-    title: 'HTML is easy',
-    author: new Date(),
-    url: false,
+    title: 'sample blog',
+    author: "Leon",
+    url: "www.leonblog.com",
     likes: 5
   }
 ]
