@@ -13,3 +13,16 @@ content-type: application/json
     "url": "www.leonblog2.com",
     "likes": 10
 }
+
+### Get all users
+GET {{url}}/api/users
+
+### Create user
+POST {{url}}/api/users
+content-type: application/json
+
+{
+    "username": "le",
+    "name": "Leon Seet",
+    "password": "password"
+}
