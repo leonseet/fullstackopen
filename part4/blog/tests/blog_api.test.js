@@ -10,8 +10,8 @@ beforeEach(async () => {
   
     const blogObjects = helper.initialBlogs
       .map(blog => new Blog(blog))
-    const promiseArray = blogObjects.map(blog => blog.save())
-    await Promise.all(promiseArray)
+    const promiseArrayBlog = blogObjects.map(blog => blog.save())
+    await Promise.all(promiseArrayBlog)
   })
 
 test("returns correct amount of blog posts in the JSON format", async () => {

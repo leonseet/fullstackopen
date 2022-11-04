@@ -22,7 +22,16 @@ POST {{url}}/api/users
 content-type: application/json
 
 {
-    "username": "le",
+    "username": "leon",
     "name": "Leon Seet",
+    "password": "password"
+}
+
+### User Login
+POST {{url}}/api/login
+content-type: application/json
+
+{
+    "username": "leon",
     "password": "password"
 }
