@@ -6,11 +6,12 @@ GET {{url}}/api/blogs
 ### Create blog
 POST {{url}}/api/blogs
 content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxlb24yIiwiaWQiOiI2MzY3MjYwZTk1MjA3YWI2OTNkMWM4NWUiLCJpYXQiOjE2Njc3MDQzNDJ9.qxhU6jqNT3UUYUbSsrODEVWoBcUuojVyn605LDoX20A
 
 {
     "title": "sample blog 2",
-    "author": "Leon2",
-    "url": "www.leonblog2.com",
+    "author": "Leon",
+    "url": "www.leonblog.com",
     "likes": 10
 }
 
@@ -22,7 +23,7 @@ POST {{url}}/api/users
 content-type: application/json
 
 {
-    "username": "leon",
+    "username": "leon2",
     "name": "Leon Seet",
     "password": "password"
 }
@@ -32,6 +33,12 @@ POST {{url}}/api/login
 content-type: application/json
 
 {
-    "username": "leon",
+    "username": "leon2",
     "password": "password"
 }
+
+### Delete blog
+DELETE {{url}}/api/blogs/6367264195207ab693d1c862
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxlb24yIiwiaWQiOiI2MzY3MjYwZTk1MjA3YWI2OTNkMWM4NWUiLCJpYXQiOjE2Njc3MDQzNDJ9.qxhU6jqNT3UUYUbSsrODEVWoBcUuojVyn605LDoX20A
+
+
