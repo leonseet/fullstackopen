@@ -6,10 +6,10 @@ GET {{url}}/api/blogs
 ### Create blog
 POST {{url}}/api/blogs
 content-type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxlb24yIiwiaWQiOiI2MzY3MjYwZTk1MjA3YWI2OTNkMWM4NWUiLCJpYXQiOjE2Njc3MDQzNDJ9.qxhU6jqNT3UUYUbSsrODEVWoBcUuojVyn605LDoX20A
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxlb24iLCJpZCI6IjYzNjg0YmI2MjAzNThkZjkwMDI3ODJlZiIsImlhdCI6MTY2Nzc3OTUyMH0.TyS2d05jipWsW1JEhvJepNYJtOHrhgcJzJdOhZKj00Y
 
 {
-    "title": "sample blog 2",
+    "title": "sample blog",
     "author": "Leon",
     "url": "www.leonblog.com",
     "likes": 10
@@ -38,7 +38,7 @@ content-type: application/json
 }
 
 ### Delete blog
-DELETE {{url}}/api/blogs/6367264195207ab693d1c862
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxlb24yIiwiaWQiOiI2MzY3MjYwZTk1MjA3YWI2OTNkMWM4NWUiLCJpYXQiOjE2Njc3MDQzNDJ9.qxhU6jqNT3UUYUbSsrODEVWoBcUuojVyn605LDoX20A
+DELETE {{url}}/api/blogs/63684bdd20358df9002782f3
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxlb24yIiwiaWQiOiI2MzY4NGJmNzIwMzU4ZGY5MDAyNzgyZjciLCJpYXQiOjE2Njc3Nzk1ODN9.RFszyJw2jTE0MbWwM4YyX2AJOA8bBgx1cxhSaafv00M
 
 

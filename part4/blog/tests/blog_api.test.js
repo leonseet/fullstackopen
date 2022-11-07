@@ -115,7 +115,8 @@ describe("blog addition", () => {
 })
 
 describe("blog deletion", () => {
-    let token = null;
+    // jest.setTimeout(60000)
+    let token = null
     beforeEach(async () => {
       await Blog.deleteMany({});
       await User.deleteMany({});
@@ -144,8 +145,7 @@ describe("blog deletion", () => {
 
     test("deletion of blog returns 204 No Content", async () => { 
         const blogsAtStart = await Blog.find({}).populate("user")
-        const blogToDelete = blogsAtStart[1]
-        console.log(blogsAtStart);
+        const blogToDelete = blogsAtStart[0]
     
         await api
             .delete(`/api/blogs/${blogToDelete.id}`)
@@ -159,14 +159,16 @@ describe("blog deletion", () => {
     test("authorization fail", async () => {
         const blogsAtStart = await Blog.find({}).populate("user")
         const blogToDelete = blogsAtStart[0]
-     
+        console.log(blogsAtStart);
+        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxlb24yIiwiaWQiOiI2MzY4NGJmNzIwMzU4ZGY5MDAyNzgyZjciLCJpYXQiOjE2Njc3Nzk1ODN9.RFszyJw2jTE0MbWwM4YyX2AJOA8bBgx1cxhSaafv00M"
+
         await api
             .delete(`/api/blogs/${blogToDelete.id}`)
             .set("Authorization", `Bearer ${token}`)
             .expect(401)
         
-        const blogsAtEnd = await helper.blogsInDb()
-        expect(blogsAtEnd).toHaveLength(blogsAtStart)
+        const blogsAtEnd = await Blog.find({}).populate("user")
+        expect(blogsAtEnd).toEqual(blogsAtStart)
     })
 })
 
