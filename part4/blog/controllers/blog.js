@@ -61,9 +61,15 @@ blogRouter.delete("/:id", async (request, response) => {
 
 
 blogRouter.put("/:id", async (request, response) => {
+  // const decodedToken = jwt.verify(request.token, config.SECRET)
+  // if(!request.token || !decodedToken.id) {
+  //   return response.status(400).json({error: "token missing or invalid"})
+  // }
+  // const user = request.user
   const body = request.body
-  
+
   const blog = {
+    user: body.user.id,
     title: body.title,
     author: body.author,
     url: body.url,

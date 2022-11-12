@@ -1,12 +1,25 @@
 import { useState } from 'react'
 
-const Blog = ({blog}) => {
+const Blog = ({blog, updateLikes, deleteBlog}) => {
   const [toggleBlogView, setToggleBlogView] = useState(false)
 
   const toggleView = () => {
     setToggleBlogView(!toggleBlogView)
   }
 
+  const handleLike = () => {
+    const newObject = {
+      ...blog,
+      likes: blog.likes + 1
+    }
+    updateLikes(blog.id, newObject)
+  }
+
+  const handleDelete = () => {
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
+      deleteBlog(blog.id)
+    }
+  }
 
   return (
     <div className="bloglist">
@@ -26,10 +39,13 @@ const Blog = ({blog}) => {
           {blog.url}
         </div>
         <div>
-          likes {blog.likes}<button id="like-btn">like</button>
+          likes {blog.likes}<button id="like-btn" onClick={handleLike}>like</button>
         </div>
         <div>
           {blog.author}
+        </div>
+        <div>
+          <button id="remove-btn" onClick={handleDelete}>remove</button>
         </div>
       </div>
     }

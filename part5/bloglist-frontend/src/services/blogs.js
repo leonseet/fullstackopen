@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import axios from 'axios'
 const baseUrl = '/api/blogs'
 
@@ -21,4 +22,28 @@ const create = async (newObject) => {
   return response.data
 }
 
-export default { getAll, setToken, create }
+const update = async (blogId, newObject) => {
+  const config = {
+    headers: { Authorization: token }
+  }
+
+  const response = await axios.put(`${baseUrl}/${blogId}`, newObject, config)
+  return response.data
+}
+
+const destroy = async (blogId) => {
+  const config = {
+    headers: { Authorization: token }
+  }
+
+  const response = await axios.delete(`${baseUrl}/${blogId}`, config)
+  return response.data
+}
+
+export default { 
+  getAll,
+  setToken,
+  create,
+  update,
+  destroy
+}

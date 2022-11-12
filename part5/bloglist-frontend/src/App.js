@@ -73,7 +73,39 @@ const App = () => {
         setMessage(null)
       }, 5000)
     }
+  }
 
+  const updateLikes = async (blogId, newObject) => {
+    try {
+      const response = await blogService.update(blogId, newObject)
+      const updatedBlogs = blogs.map(blog => blogId === response.id ? response : blog)
+      setBlogs(updatedBlogs)
+    } catch (error) {
+      setIsError(true)
+      setMessage(error.response.data.error)
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
+    }
+  }
+
+  const deleteBlog = async (blogId) => {
+    try {
+      await blogService.destroy(blogId)
+      const updatedBlogs = blogs.filter(blog => blog.id !== blogId)
+      setBlogs(updatedBlogs)
+      setIsError(false)
+      setMessage(`Blog deleted`)
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
+    } catch (error) {
+      setIsError(true)
+      setMessage(error.response.data.error)
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
+    }
   }
 
   return (
@@ -101,7 +133,10 @@ const App = () => {
         <Togglable buttonLabel="new note">
           <Create createBlog={createBlog} />
         </Togglable>
-        {blogs.map(blog => <Blog key={blog.id} blog={blog} />)}     
+        {blogs
+          .sort((a, b) => b.likes - a.likes)
+          .map(blog => <Blog key={blog.id} blog={blog} updateLikes={updateLikes} deleteBlog={deleteBlog}/>)
+          }     
       </div>
       }
     </div>

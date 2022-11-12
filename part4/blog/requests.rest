@@ -23,7 +23,7 @@ POST {{url}}/api/users
 content-type: application/json
 
 {
-    "username": "leon",
+    "username": "leon2",
     "name": "Leon Seet",
     "password": "password"
 }
@@ -33,7 +33,7 @@ POST {{url}}/api/login
 content-type: application/json
 
 {
-    "username": "leon",
+    "username": "leon2",
     "password": "password"
 }
 
@@ -41,4 +41,14 @@ content-type: application/json
 DELETE {{url}}/api/blogs/63684bdd20358df9002782f3
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxlb24yIiwiaWQiOiI2MzY4NGJmNzIwMzU4ZGY5MDAyNzgyZjciLCJpYXQiOjE2Njc3Nzk1ODN9.RFszyJw2jTE0MbWwM4YyX2AJOA8bBgx1cxhSaafv00M
 
+### Update blog
+PUT {{url}}/api/blogs/636d90377b19afaa26bb7b55
+content-type: application/json
 
+{
+    "user": "636ef51c1fe5b184782c9efc",
+    "title": "udpated title",
+    "author": "updated author",
+    "url": "updated url",
+    "likes": 200
+}
