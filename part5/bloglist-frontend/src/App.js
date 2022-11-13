@@ -19,10 +19,10 @@ const App = () => {
     blogService
       .getAll()
       .then(blogs => setBlogs( blogs )
-    )}, [])
+      )}, [])
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem("loggedBlogappUser")
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
@@ -40,7 +40,7 @@ const App = () => {
       blogService.setToken(user.token)
       window.localStorage.setItem(
         'loggedBlogappUser', JSON.stringify(user)
-      ) 
+      )
       setUsername('')
       setPassword('')
     } catch (exception) {
@@ -53,7 +53,7 @@ const App = () => {
   }
 
   const handleLogout = () => {
-    window.localStorage.removeItem("loggedBlogappUser")
+    window.localStorage.removeItem('loggedBlogappUser')
     setUser(null)
   }
 
@@ -95,7 +95,7 @@ const App = () => {
       const updatedBlogs = blogs.filter(blog => blog.id !== blogId)
       setBlogs(updatedBlogs)
       setIsError(false)
-      setMessage(`Blog deleted`)
+      setMessage('Blog deleted')
       setTimeout(() => {
         setMessage(null)
       }, 5000)
@@ -111,33 +111,33 @@ const App = () => {
   return (
     <div>
       {user === null ?
-      <div>
-        <h2>log in to application</h2>
-        <Notification message={message} isError={isError}/>
-        <Login username={username} 
-        password={password} 
-        setUsername={setUsername} 
-        setPassword={setPassword} 
-        handleLogin={handleLogin} />
-      </div> :
-      <div>
-        <h2>blogs</h2>
-        <Notification message={message} isError={isError}/>
         <div>
-          {user.name} logged in
-          <button id="logout-btn" onClick={handleLogout}>
+          <h2>log in to application</h2>
+          <Notification message={message} isError={isError}/>
+          <Login username={username}
+            password={password}
+            setUsername={setUsername}
+            setPassword={setPassword}
+            handleLogin={handleLogin} />
+        </div> :
+        <div>
+          <h2>blogs</h2>
+          <Notification message={message} isError={isError}/>
+          <div>
+            {user.name} logged in
+            <button id="logout-btn" onClick={handleLogout}>
               logout
-          </button> 
+            </button>
+          </div>
+          <br></br>
+          <Togglable buttonLabel="new note">
+            <Create createBlog={createBlog} />
+          </Togglable>
+          {blogs
+            .sort((a, b) => b.likes - a.likes)
+            .map(blog => <Blog key={blog.id} blog={blog} updateLikes={updateLikes} deleteBlog={deleteBlog}/>)
+          }
         </div>
-        <br></br>
-        <Togglable buttonLabel="new note">
-          <Create createBlog={createBlog} />
-        </Togglable>
-        {blogs
-          .sort((a, b) => b.likes - a.likes)
-          .map(blog => <Blog key={blog.id} blog={blog} updateLikes={updateLikes} deleteBlog={deleteBlog}/>)
-          }     
-      </div>
       }
     </div>
   )
