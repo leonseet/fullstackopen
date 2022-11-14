@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Blog = ({blog, updateLikes, deleteBlog}) => {
+const Blog = ({ blog, updateLikes, deleteBlog }) => {
   const [toggleBlogView, setToggleBlogView] = useState(false)
 
   const toggleView = () => {
@@ -23,32 +23,33 @@ const Blog = ({blog, updateLikes, deleteBlog}) => {
 
   return (
     <div className="bloglist">
-    {
-    toggleBlogView === false ?
-      <div>
-        {blog.title}
-        <button id="viewblog-btn" onClick={toggleView}>
-          view
-        </button> 
-      </div> :
-      <div>
-        <div>
-          {blog.title}<button id="hideblog-btn" onClick={toggleView}>hide</button>
-        </div>
-        <div>
-          {blog.url}
-        </div>
-        <div>
-          likes {blog.likes}<button id="like-btn" onClick={handleLike}>like</button>
-        </div>
-        <div>
-          {blog.author}
-        </div>
-        <div>
-          <button id="remove-btn" onClick={handleDelete}>remove</button>
-        </div>
-      </div>
-    }
+      {
+        toggleBlogView === false ?
+          <div>
+            <span className="blog-title">{blog.title}</span>
+            <button className='view-button' id="viewblog-btn" onClick={toggleView}>
+              view
+            </button>
+          </div> :
+          <div>
+            <div>
+              {blog.title}<button className='hide-button' id="hideblog-btn" onClick={toggleView}>hide</button>
+            </div>
+            <div>
+              <span className='blog-url'>{blog.url}</span>
+            </div>
+            <div>
+              likes <span className='blog-likes'>{blog.likes}</span>
+              <button className='like-button' id="like-btn" onClick={handleLike}>like</button>
+            </div>
+            <div className='blog-author'>
+              {blog.author}
+            </div>
+            <div>
+              <button className='remove-button' id="remove-btn" onClick={handleDelete}>remove</button>
+            </div>
+          </div>
+      }
     </div>
   )
 }
