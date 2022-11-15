@@ -15,6 +15,7 @@ const Login = ({ username, password, setUsername, setPassword, handleLogin }) =>
         <div>
                     username
           <input
+            id="username"
             type="text"
             value={username}
             name="Username"
@@ -24,6 +25,7 @@ const Login = ({ username, password, setUsername, setPassword, handleLogin }) =>
         <div>
                     password
           <input
+            id="password"
             type="password"
             value={password}
             name="Password"
