@@ -130,13 +130,15 @@ const App = () => {
             </button>
           </div>
           <br></br>
-          <Togglable buttonLabel="new note">
+          <Togglable id="newnote-button" buttonLabel="new note">
             <Create createBlog={createBlog} />
           </Togglable>
-          {blogs
-            .sort((a, b) => b.likes - a.likes)
-            .map(blog => <Blog key={blog.id} blog={blog} updateLikes={updateLikes} deleteBlog={deleteBlog}/>)
-          }
+          <div id="blogs">
+            {blogs
+              .sort((a, b) => b.likes - a.likes)
+              .map(blog => <Blog key={blog.id} blog={blog} updateLikes={updateLikes} deleteBlog={deleteBlog}/>)
+            }
+          </div>
         </div>
       }
     </div>
