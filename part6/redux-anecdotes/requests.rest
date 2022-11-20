@@ -1,0 +1,13 @@
+@url = http://localhost:3001
+
+### Get all anecdotes
+GET {{url}}/anecdotes
+
+### Create anecdote
+POST {{url}}/anecdotes
+content-type: application/json
+# Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxlb24iLCJpZCI6IjYzNmFmY2MzZWE1Zjk5MGNiYjJlMTc5YiIsImlhdCI6MTY2Nzk1NjYxM30.E0tQFYRFWsC-MdOt-YSkB3k6KsHDQWuj0tpe6pVWSKE
+
+{
+    "content": "dummy content"
+}

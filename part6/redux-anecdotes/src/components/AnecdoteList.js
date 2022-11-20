@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { upvote } from '../reducers/anecdoteReducer'
-import { showNotification, hideNotification } from '../reducers/notificationReducer'
+import { incrementVote } from '../reducers/anecdoteReducer'
+import { showNotification, hideNotification, setNotification } from '../reducers/notificationReducer'
 import { orderBy } from "lodash"
 
 export const AnecdoteList = () => {
@@ -14,9 +14,8 @@ export const AnecdoteList = () => {
 
 	const vote = (id) => {
 			console.log('vote', id)
-			dispatch(upvote(id))
-      dispatch(showNotification(`you voted '${anecdotes.find(a => a.id === id).content}'`))
-      setTimeout(() => dispatch(hideNotification()), 5000)
+			dispatch(incrementVote(id))
+      dispatch(setNotification(`you voted '${anecdotes.find(a => a.id === id).content}'`, 5000))
 			}
 
 	const sortedAnecdotes = orderBy(anecdotes, ["votes"], ["desc"])
